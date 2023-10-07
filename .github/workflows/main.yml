@@ -18,4 +18,9 @@ jobs:
 
       - name: Deploy to Website
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} user@your-website.com 'cd /path/to/website && git pull origin main'
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no diesel.kelly@gmail.com "cd /basementmonkey && git pull origin main"
+
+
